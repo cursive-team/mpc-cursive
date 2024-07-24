@@ -5,31 +5,31 @@ import { Icons } from "./components/Icons";
 export const fontBase = Inter({ subsets: ["latin"], variable: "--font-base" });
 
 export const APP_CONFIG = {
-  APP_NAME: "Cursive Starter",
-  APP_DESCRIPTION: "A starter template for Cursive",
-  SUPPORT_EMAIL: "example@gmail.com",
-  ALLOW_INCOGNITO: false, // Set to false if you want to disable incognito mode
+  APP_NAME: "mpc.cursive.team",
+  APP_DESCRIPTION: "A repo of MPC apps built by Cursive",
+  SUPPORT_EMAIL: "hellp@cursive.team",
+  ALLOW_INCOGNITO: true, // Set to false if you want to disable incognito mode
   IS_MOBILE_ONLY: true, // Set to true if you want to disable the web version
   FOOTER_ICON_SIZE: 20,
 };
 
 export const ROUTER_ITEMS: RouterItem[] = [
   {
-    label: "Home",
+    label: "Profile",
     href: "/",
-    icon: Icons.Home,
+    icon: Icons.Social,
     iconSize: 20,
   },
   {
-    label: "Settings",
-    href: "/settings",
-    icon: Icons.Settings,
+    label: "Queries",
+    href: "/queries",
+    icon: Icons.Proof,
     iconSize: 20,
   },
   {
     label: "Components",
     href: "/components",
-    icon: Icons.Profile,
+    icon: Icons.Settings,
     iconSize: 20,
   },
 ];

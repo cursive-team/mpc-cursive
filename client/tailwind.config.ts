@@ -13,14 +13,15 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "light-purple-gradient": "linear-gradient(to right, #e0c3fc, #8ec5fc)",
       },
       fontFamily: {
         base: "var(--font-base)",
       },
       colors: {
-        primary: "#20639B",
-        secondary: "#173F5F",
-        tertiary: "#3CAEA3",
+        primary: "#23c1e7",
+        secondary: "#8e48f6",
+        tertiary: "black",
       },
     },
   },

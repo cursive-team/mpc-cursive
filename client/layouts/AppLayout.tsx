@@ -23,7 +23,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <OnlyMobileLayout>
       <AppHeader isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <div className="px-3">{children}</div>
+      <div className="px-5">{children}</div>
       {!isMenuOpen && <AppFooter />}
     </OnlyMobileLayout>
   );

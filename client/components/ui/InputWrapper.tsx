@@ -2,7 +2,7 @@ import { classed } from "@tw-classed/react";
 import type * as Classed from "@tw-classed/react";
 import { ReactNode } from "react";
 
-const InputLabel = classed.div("text-iron-800", {
+const InputLabel = classed.div("text-black mb-1", {
   variants: {
     size: {
       xs: "text-xs leading-4",
@@ -58,7 +58,11 @@ const InputWrapper = ({
   return (
     <InputSpacing className={className} spacing>
       <InputSpacing spacing={spacing}>
-        {label && <InputLabel size={size}>{label}</InputLabel>}
+        {label && (
+          <InputLabel size={size}>
+            <b>{label}</b>
+          </InputLabel>
+        )}
         <div className={className}>{children}</div>
       </InputSpacing>
       {error ? (

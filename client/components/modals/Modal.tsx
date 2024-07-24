@@ -20,7 +20,7 @@ const Modal = ({
   children,
   closable = true, // show close button when active
   onClose, // run when modal close
-  withBackButton = false, // show back button when active
+  withBackButton = true, // show back button when active
 }: ModalProps) => {
   const onCloseModal = () => {
     onClose?.();
@@ -57,11 +57,11 @@ const Modal = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="bg-main fixed top-0 bottom-0 left-0 right-0 bg-shark-970 w-full max-h-screen transform py-6 px-3 xs:px-4 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="bg-main fixed top-0 bottom-0 left-0 right-0 bg-shark-970 w-full max-h-screen transform py-6 px-6 text-left align-middle shadow-xl transition-all">
                 {closable && (
                   <div
                     className={cn(
-                      "fixed z-100 top-0 flex items-center h-12 py-8",
+                      "fixed z-100 top-0 flex items-center h-12 py-8 px-2",
                       withBackButton ? "left-4" : "right-[24px]"
                     )}
                   >
@@ -71,14 +71,14 @@ const Modal = ({
                       onClick={onCloseModal}
                     >
                       {withBackButton ? (
-                        <div className="flex items-center gap-1">
-                          <Icons.ArrowLeft className="text-white" />
+                        <div className="flex items-center gap-2">
+                          <Icons.ArrowLeft className="text-black" />
                           <span className="text-iron-950 font-sans text-sm">
                             Back
                           </span>
                         </div>
                       ) : (
-                        <Icons.Close size={20} className="text-white" />
+                        <Icons.Close size={20} className="text-black" />
                       )}
                     </button>
                   </div>

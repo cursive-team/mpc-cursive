@@ -4,6 +4,7 @@ import { cn } from "@/helpers/utils";
 import { classed } from "@tw-classed/react";
 import { useRouter } from "next/router";
 import { ReactNode, useState } from "react";
+import Image from "next/image"; // Import the Image component at the top of your file
 
 interface AppHeaderProps {
   isMenuOpen: boolean;
@@ -113,29 +114,7 @@ const AppHeaderContent = ({
 
   return (
     <div className="fixed inset-0 w-full overflow-auto px-3 xs:px-4 z-100 h-full bg-primary">
-      <div className="flex xs:h-[60px] py-5">
-        {showBackButton && (
-          <button
-            onClick={onBack}
-            type="button"
-            className="flex gap-2 items-center text-iron-950"
-          >
-            <Icons.ArrowLeft />
-            <span>Back</span>
-          </button>
-        )}
-        <button
-          type="button"
-          onClick={() => {
-            setIsMenuOpen(!isMenuOpen);
-            setActiveMenuIndex(null);
-          }}
-          className="flex gap-3 items-center ml-auto text-iron-950"
-        >
-          <span>Close</span>
-          {isMenuOpen ? <Icons.Close /> : <Icons.Burgher />}
-        </button>
-      </div>
+      <div className="flex xs:h-[60px] py-5"></div>
       <div className="mt-2">
         <div className="flex flex-col gap-6">
           {MenuItems.map((item, index) => {
@@ -174,7 +153,7 @@ const AppHeader = ({ isMenuOpen, setIsMenuOpen }: AppHeaderProps) => {
 
   return (
     <div
-      className={cn("flex w-full items-center p-3 py-5 xs:p-4 z-50", {
+      className={cn("flex w-full items-center px-5 pt-5 pb-2 xs:p-4 z-50", {
         "bg-primary": isMenuOpen,
         "bg-transparent": !isMenuOpen,
       })}
@@ -182,20 +161,13 @@ const AppHeader = ({ isMenuOpen, setIsMenuOpen }: AppHeaderProps) => {
       {!isMenuOpen && (
         <Link href="/">
           <button type="button" className="flex gap-2 items-center">
-            logo
+            <Image src="/cursive-logo.png" alt="Logo" width={75} height={75} />{" "}
           </button>
         </Link>
       )}
 
       <div className="flex gap-4 items-center ml-auto">
         <span className="text-primary">{isMenuOpen && "Close"}</span>
-        <button className="text-iron-950" onClick={toggleMenu}>
-          {isMenuOpen ? (
-            <Icons.Close className="text-primary" />
-          ) : (
-            <Icons.Burgher className="text-primary" />
-          )}
-        </button>
       </div>
 
       <AppHeaderContent isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />

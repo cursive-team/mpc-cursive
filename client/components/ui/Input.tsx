@@ -8,7 +8,8 @@ const InputComponent = classed.input(
   {
     variants: {
       variant: {
-        primary: "bg-transparent border border-primary",
+        primary: "bg-transparent border border-black",
+        secondary: "bg-transparent border border-gray-10",
       },
       hasError: {
         true: "!border-b-error",
@@ -65,7 +66,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               {...props}
               placeholder={placeholder}
               variant={variant}
-              hasIcon={!!icon}
               hasError={!!error}
               autoComplete="off"
             />

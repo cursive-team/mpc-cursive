@@ -22,10 +22,10 @@ const RadioLabelBase = classed.span("font-normal", {
     disabled: false,
   },
 });
-const RadioTitle = classed.span(RadioLabelBase, "text-sm");
+const RadioTitle = classed.span(RadioLabelBase, "text-sm text-black");
 const RadioDescription = classed.span(
   RadioLabelBase,
-  "ml-6 text-sm text-gray-11"
+  "ml-6 text-sm text-black"
 );
 
 const RadioCircleBase = classed.div(
@@ -33,7 +33,7 @@ const RadioCircleBase = classed.div(
   {
     variants: {
       checked: {
-        true: "border-gray-12 before:bg-gray-12",
+        true: "border-gray-12 bg-black",
       },
       disabled: {
         true: "opacity-50 pointer-events-none",

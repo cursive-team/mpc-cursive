@@ -21,7 +21,7 @@ const CardProgressLine = classed.div("absolute bottom-0 left-0 right-0 h-1", {
   variants: {
     color: {
       white: "bg-white",
-      black: "bg-[#323232]",
+      black: "bg-black",
     },
   },
   defaultVariants: {
