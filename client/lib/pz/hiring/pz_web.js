@@ -388,6 +388,12 @@ function __wbg_get_imports() {
     imports.wbg.__wbg_set_20cbc34131e76824 = function(arg0, arg1, arg2) {
         getObject(arg0)[takeObject(arg1)] = takeObject(arg2);
     };
+    imports.wbg.__wbg_time_2c9ba8df2c0b364e = function(arg0, arg1) {
+        console.time(getStringFromWasm0(arg0, arg1));
+    };
+    imports.wbg.__wbg_timeEnd_d6fcb4eac2e76fb9 = function(arg0, arg1) {
+        console.timeEnd(getStringFromWasm0(arg0, arg1));
+    };
     imports.wbg.__wbg_crypto_1d1f22824a6a080c = function(arg0) {
         const ret = getObject(arg0).crypto;
         return addHeapObject(ret);

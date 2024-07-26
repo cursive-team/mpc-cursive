@@ -84,7 +84,6 @@ export default function RecruitingModal({
                 label="Rust engineer"
                 checked={hiringProfile.criteria[0]}
                 onClick={() => {
-                  console.log(hiringProfile.criteria);
                   setHiringProfile((prev) => ({
                     ...prev,
                     criteria: [

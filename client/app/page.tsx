@@ -11,7 +11,6 @@ import {
 import init, {
   i_hiring_client_dec_share,
   i_hiring_client_encrypt,
-  i_hiring_server_compute,
 } from "@/lib/pz/hiring/pz_web";
 import { supabase } from "@/lib/realtime";
 import {
@@ -30,6 +29,26 @@ enum UserQueryState {
   USER_SENT_DECRYPTION_SHARE,
   ADMIN_SENT_DECRYPTION_SHARE,
   COMPLETE,
+}
+
+// Assuming the Rocket server endpoint for computation is POST /compute
+async function computeOnServer(jc_0_fhe: any, jc_1_fhe: any, seed: bigint) {
+  try {
+    console.log(JSON.stringify({ jc_0_fhe, jc_1_fhe, seed }));
+    const response = await fetch("http://localhost:8000/compute", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ jc_0_fhe, jc_1_fhe, seed }),
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch:", error);
+  }
 }
 
 export default function Home() {
@@ -95,6 +114,7 @@ export default function Home() {
             }
           });
 
+        // send initial collective_key_share if user has set up hiringProfile
         if (profile.role === "User" && hiringProfile) {
           let user_key = deserializeData(profile.key);
           console.log(user_key);
@@ -134,7 +154,8 @@ export default function Home() {
             await fetch(payload.data).then((res) => res.text())
           );
 
-          let jc_0_fhe = i_hiring_client_encrypt(
+          console.time("admin_encryption");
+          let jc_0_fhe = await i_hiring_client_encrypt(
             0,
             admin_key,
             [collective_key_share_0, collective_key_share_1],
@@ -145,6 +166,7 @@ export default function Home() {
               hiringProfile.criteria.map((criterion) => (criterion ? 1 : 0))
             )
           );
+          console.timeEnd("admin_encryption");
 
           const messageLink = await psiBlobUploadClient(
             "admin_encrypted_data",
@@ -188,7 +210,23 @@ export default function Home() {
               hiringProfile.criteria.map((criterion) => (criterion ? 1 : 0))
             )
           );
-          let res_fhe = i_hiring_server_compute(jc_0_fhe, jc_1_fhe);
+
+          let res_fhe;
+          while (true) {
+            res_fhe = await computeOnServer(
+              jc_0_fhe,
+              jc_1_fhe,
+              BigInt("0x" + sha256(profile.room)) & BigInt("0xFFFFFFFFFFFFFFFF")
+            );
+            if (
+              !window.confirm(
+                "Continue computation? Click OK to proceed or Cancel to stop."
+              )
+            ) {
+              break;
+            }
+          }
+
           let res_fhe_share_1 = i_hiring_client_dec_share(user_key, res_fhe);
 
           const messageLink = await psiBlobUploadClient(

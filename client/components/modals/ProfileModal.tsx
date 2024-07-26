@@ -91,21 +91,16 @@ export function ProfileModal({
         <Button
           variant="tertiary"
           onClick={() => {
-            let newProfile = profile;
-            if (profile.key === "") {
-              i_hiring_init(
-                BigInt("0x" + sha256(profile.room)) &
-                  BigInt("0xFFFFFFFFFFFFFFFF")
-              );
-              let client_keys = i_hiring_client_setup();
-              let client_keys_serialized = serializeData(client_keys);
-              newProfile = {
-                ...profile,
-                key: client_keys_serialized,
-              };
-              setProfile(newProfile);
-              1;
-            }
+            i_hiring_init(
+              BigInt("0x" + sha256(profile.room)) & BigInt("0xFFFFFFFFFFFFFFFF")
+            );
+            let client_keys = i_hiring_client_setup();
+            let client_keys_serialized = serializeData(client_keys);
+            const newProfile = {
+              ...profile,
+              key: client_keys_serialized,
+            };
+            setProfile(newProfile);
             saveProfile(newProfile);
             setIsModalOpen(false);
           }}
